@@ -14,7 +14,7 @@ local config = wezterm.config_builder()
 -- UI Configuration
 -- ===================================================================
 
-config.color_scheme = 'tokyonight'
+config.color_scheme = 'darkmatrix'
 
 -- Disable tab bar for cleaner interface
 -- Set to true if you want to use WezTerm's built-in tab management
