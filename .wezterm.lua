@@ -23,6 +23,11 @@ config.enable_tab_bar = false
 -- "RESIZE" provides resize handles without title bar for minimal look
 config.window_decorations = "RESIZE"
 
+-- Columns (width) and rows (height) in character units
+config.initial_cols = 120  -- Width
+config.initial_rows = 25   -- Height 
+
+
 -- ===================================================================
 -- Performance Configuration
 -- ===================================================================
