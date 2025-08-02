@@ -14,7 +14,7 @@ local config = wezterm.config_builder()
 -- UI Configuration
 -- ===================================================================
 
-config.color_scheme = 'darkmatrix'
+config.color_scheme = "darkmatrix"
 
 -- Disable tab bar for cleaner interface
 -- Set to true if you want to use WezTerm's built-in tab management
@@ -26,16 +26,17 @@ config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
 
 -- Columns (width) and rows (height) in character units
-config.initial_cols = 120  -- Width
-config.initial_rows = 25   -- Height 
+config.initial_cols = 120 -- Width
+config.initial_rows = 25 -- Height
 
 -- ===================================================================
 -- Font Configuration
 -- ===================================================================
--- JetBrains Mono font configuration
-config.font = wezterm.font({
-	family = "JetBrains Mono",
-	weight = "Bold",
+-- JetBrains Mono with fallback
+config.font = wezterm.font_with_fallback({
+	{ family = "JetBrainsMono Nerd Font", weight = "Bold" },
+	{ family = "JetBrains Mono", weight = "Bold" },
+	"Symbols Nerd Font Mono",
 })
 
 -- Font size
@@ -45,13 +46,11 @@ config.font_size = 13.0
 config.freetype_load_target = "HorizontalLcd"
 config.freetype_render_target = "HorizontalLcd"
 
-
 -- ===================================================================
 -- Transparency Configuration
 -- ===================================================================
 -- Window transparency (0.0 = fully transparent, 1.0 = fully opaque)
 config.window_background_opacity = 0.95
-
 
 -- ===================================================================
 -- Performance Configuration
@@ -93,6 +92,40 @@ config.keys = {
 		mods = "CTRL|SHIFT",
 		action = act.PasteFrom("PrimarySelection"),
 	},
+
+
+	-- ============================================== Splitar tela =============================================
+	-- Ctrl + \ - Divide verticalmente (lado a lado)
+	-- Ctrl + -    Divide horizontalmente (cima/baixo)
+	-- Ctrl + H/J/K/L - Navega entre painéis
+	-- Ctrl + X - Fecha painel atual
+	-- Ctrl + Z - Maximiza/restaura painel
+
+	-- Split VERTICAL (divide lado a lado | |)
+	{
+		key = "\\",
+		mods = "CTRL",
+		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+	},
+
+	-- Split HORIZONTAL (divide em cima/embaixo ─)
+	{
+		key = "-",
+		mods = "CTRL",
+		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+	},
+
+	-- Navegação entre painéis (estilo Vim)
+	{ key = "h", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Left") },
+	{ key = "l", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Right") },
+	{ key = "k", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Up") },
+	{ key = "j", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Down") },
+
+	-- Fechar painel atual
+	{ key = "x", mods = "CTRL", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
+
+	-- Zoom no painel (maximizar/restaurar)
+	{ key = "z", mods = "CTRL", action = wezterm.action.TogglePaneZoomState },
 }
 
 -- ===================================================================
