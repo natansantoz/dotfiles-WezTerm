@@ -152,6 +152,27 @@ config.keys = {
 
 	-- Zoom no painel (maximizar/restaurar)
 	{ key = "z", mods = "CTRL", action = wezterm.action.TogglePaneZoomState },
+
+}
+-- ===================================================================
+-- Mouse Configuration
+-- ===================================================================
+config.adjust_window_size_when_changing_font_size = false
+
+config.mouse_bindings = {
+	-- Ctrl + Scroll Up para aumentar zoom
+	{
+		event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+		mods = "CTRL",
+		action = act.IncreaseFontSize,
+	},
+
+	-- Ctrl + Scroll Down para diminuir zoom
+	{
+		event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+		mods = "CTRL",
+		action = act.DecreaseFontSize,
+	},
 }
 
 -- ===================================================================
