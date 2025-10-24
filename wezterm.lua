@@ -153,6 +153,13 @@ config.keys = {
 	-- Zoom no painel (maximizar/restaurar)
 	{ key = "z", mods = "CTRL", action = wezterm.action.TogglePaneZoomState },
 
+	-- Enable Ctrl+L to clear the terminal when using the fish shell.
+	{
+		key = 'l',
+		mods = 'CTRL',
+		action = wezterm.action.SendKey { key = 'l', mods = 'CTRL' },
+	},
+
 }
 -- ===================================================================
 -- Mouse Configuration
